@@ -1,0 +1,7 @@
+[package]
+name = "rust-webserver"
+version = "0.1.0"
+authors = ["Richard Ramos <info@richardramos.me>"]
+edition = "2018"
+
+[dependencies]
