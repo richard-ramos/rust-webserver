@@ -1,5 +1,5 @@
 [package]
-name = "rust-webserver"
+name = "rust_webserver"
 version = "0.1.0"
 authors = ["Richard Ramos <info@richardramos.me>"]
 edition = "2018"
