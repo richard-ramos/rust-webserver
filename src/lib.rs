@@ -20,6 +20,18 @@ pub struct ThreadPool {
     sender: mpsc::Sender<Job>,
 }
 
+impl Drop for ThreadPool {
+    fn drop(&nut self) {
+        for worker in &mut self.workers {
+            println!("Shutting down worker {}", worker.id);
+
+            if let Some(thread) = worker.thread.take() {
+                thread.join().unwrap();
+            }
+        }
+    }
+}
+
 impl ThreadPool {
     /// Create a new ThreadPool.
     ///
@@ -60,7 +72,7 @@ impl ThreadPool {
 
 struct Worker {
     id: usize,
-    thread: thread::JoinHandle<()>,
+    thread: Option<thread::JoinHandle<()>>,
 }
 
 impl Worker {
@@ -77,7 +89,7 @@ impl Worker {
 
         Worker {
             id,
-            thread,
+            thread: Some(thread),
         }
     }
 }
